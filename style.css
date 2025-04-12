@@ -1,0 +1,242 @@
+/* style.css */
+
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+    --primary-color: #007bff; /* Azul primario de Bootstrap, puedes cambiarlo */
+    --secondary-color: #6c757d; /* Gris secundario */
+    --accent-color: #fd7e14; /* Naranja como acento */
+    --light-bg: #f8f9fa;
+    --dark-slate: #343a40;
+    --card-bg: #ffffff;
+    --text-color: #212529;
+    --border-radius: 0.5rem; /* Bordes más redondeados */
+    --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    /* --- Fondo con patrón --- */
+    /* Opción 1: Usando un archivo de imagen (Recomendado si tienes uno bueno) */
+    background-image: url('pattern.png'); /* <<< ASEGÚRATE DE TENER ESTE ARCHIVO */
+    /* Opción 2: Un patrón simple generado con CSS (si no tienes imagen) */
+    /* background-image: linear-gradient(45deg, #e9ecef 25%, transparent 25%), linear-gradient(-45deg, #e9ecef 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #e9ecef 75%), linear-gradient(-45deg, transparent 75%, #e9ecef 75%); */
+    /* background-size: 20px 20px; */
+
+    background-repeat: repeat;
+    background-attachment: fixed; /* Efecto fijo al hacer scroll */
+    line-height: 1.6;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--primary-color) !important;
+}
+
+.navbar-brand i {
+    animation: paw-wave 2s infinite ease-in-out;
+}
+
+@keyframes paw-wave {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(15deg); }
+    75% { transform: rotate(-15deg); }
+}
+
+
+.container {
+    max-width: 720px; /* Ancho máximo para mejor lectura */
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+   /* transform: translateY(-3px); /* Ligero efecto al pasar el mouse */
+}
+
+h2, h3, h4 {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.section-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-title span {
+    margin-right: auto; /* Empuja el icono a la derecha */
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 0.3rem;
+}
+
+.form-control-lg {
+    border-radius: var(--border-radius);
+    padding: 0.8rem 1rem;
+    border: 1px solid #ced4da;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control-lg:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+    background-color: #fff; /* Fondo blanco al enfocar */
+}
+
+.form-check-input {
+    width: 1.8em;
+    height: 1em;
+    margin-top: 0.3em;
+    border-radius: 2em;
+}
+.form-check-label {
+    padding-left: 0.5em;
+}
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn {
+    border-radius: var(--border-radius);
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+    letter-spacing: 0.5px;
+}
+
+.btn-lg {
+    padding: 0.9rem 1.8rem;
+    font-size: 1.1rem;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: darken(var(--primary-color), 10%);
+    border-color: darken(var(--primary-color), 10%);
+    transform: scale(1.02);
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+.btn-success:hover {
+    background-color: darken(#28a745, 10%);
+    border-color: darken(#28a745, 10%);
+     transform: scale(1.02);
+}
+
+.btn-info {
+     background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+.btn-info:hover {
+     background-color: darken(#17a2b8, 10%);
+    border-color: darken(#17a2b8, 10%);
+     transform: scale(1.02);
+}
+
+.btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+.btn-outline-danger:hover {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-outline-secondary {
+     color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+.btn-outline-secondary:hover {
+     color: #fff;
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+/* Estilos específicos de vistas */
+#loading-view .spinner-grow {
+    width: 3rem;
+    height: 3rem;
+}
+
+#public-profile-view .profile-pic {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid var(--primary-color);
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
+}
+
+#edit-view .profile-pic-edit {
+     width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #eee;
+}
+
+#photo-preview img {
+     max-width: 200px;
+     max-height: 200px;
+     object-fit: cover;
+     border-radius: var(--border-radius);
+     border: 3px solid #eee;
+}
+
+.info-section {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    border: 1px solid #eee;
+}
+
+.alert-info {
+     background-color: #e2f3ff;
+     border-color: #b8e7ff;
+     color: #0c5464;
+}
+.alert-info .alert-heading {
+    color: inherit;
+}
+
+.footer {
+    font-size: 0.9em;
+    background-color: #e9ecef !important; /* Un poco más oscuro que el fondo */
+}
+
+/* Clases Helper */
+.view { display: none; }
+.active-view { display: block; animation: fadeIn 0.5s ease-in-out; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

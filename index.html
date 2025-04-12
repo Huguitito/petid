@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mascotas QR - Perfil</title>
+
+    <!-- Google Fonts (Poppins) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome (para iconos) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Estilos Personalizados -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <header class="navbar navbar-light bg-light shadow-sm mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-paw me-2"></i>
+                Mascotas QR
+            </a>
+        </div>
+    </header>
+
+    <div class="container mt-4 mb-5">
+
+        <!-- Vista de Carga -->
+        <div id="loading-view" class="view text-center p-5">
+            <div class="spinner-grow text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+            <p class="mt-3 text-muted">Buscando información... 🐾</p>
+        </div>
+
+        <!-- Vista de Registro -->
+        <div id="register-view" class="view card shadow-lg border-0 p-4 p-md-5">
+            <h2 class="text-center mb-4"><i class="fas fa-id-card-alt me-2"></i> ¡Activa tu Chapita!</h2>
+            <p class="text-center text-muted mb-4">Completa los datos para que tu amigo peludo esté siempre seguro.</p>
+            <form id="register-form" novalidate>
+                <h4 class="section-title"><span>1. Datos de Contacto</span> <i class="fas fa-user-circle text-primary"></i></h4>
+                <div class="mb-3">
+                    <label for="owner-name" class="form-label">Tu Nombre:</label>
+                    <input type="text" class="form-control form-control-lg" id="owner-name" required placeholder="Ej: Ana Pérez">
+                </div>
+                <div class="mb-3">
+                    <label for="owner-phone" class="form-label">Tu Teléfono WhatsApp:</label>
+                    <input type="tel" class="form-control form-control-lg" id="owner-phone" required placeholder="+54 9 11 1234 5678">
+                </div>
+                <div class="mb-3">
+                    <label for="owner-address" class="form-label">Tu Dirección (Opcional, para Mapa):</label>
+                    <input type="text" class="form-control form-control-lg" id="owner-address" placeholder="Calle Falsa 123, Ciudad">
+                </div>
+                <div class="form-check form-switch mb-4">
+                    <input class="form-check-input" type="checkbox" id="show-address" checked>
+                    <label class="form-check-label" for="show-address">
+                        Mostrar enlace a Google Maps (¡Ayuda a que te encuentren!)
+                    </label>
+                </div>
+
+                <h4 class="section-title"><span>2. Datos de tu Mascota</span> <i class="fas fa-heart text-danger"></i></h4>
+                <div class="mb-3">
+                    <label for="pet-name" class="form-label">Nombre de tu Mascota:</label>
+                    <input type="text" class="form-control form-control-lg" id="pet-name" required placeholder="Ej: Luna">
+                </div>
+                 <div class="mb-3">
+                    <label for="pet-photo" class="form-label">Foto (¡Muy importante!):</label>
+                    <input type="file" class="form-control form-control-lg" id="pet-photo" accept="image/png, image/jpeg, image/gif" required>
+                    <div id="photo-preview" class="mt-3 text-center"></div> <!-- Para vista previa -->
+                </div>
+                 <div class="mb-3">
+                    <label for="pet-observations" class="form-label">Notas Importantes (Opcional):</label>
+                    <textarea class="form-control form-control-lg" id="pet-observations" rows="3" placeholder="Ej: Tímido con extraños, necesita medicación diaria, ¡adora las salchichas!"></textarea>
+                </div>
+
+                <h4 class="section-title"><span>3. Tu Cuenta</span> <i class="fas fa-lock text-warning"></i></h4>
+                 <div class="mb-3">
+                    <label for="register-email" class="form-label">Tu Email:</label>
+                    <input type="email" class="form-control form-control-lg" id="register-email" required placeholder="tu@email.com">
+                </div>
+                <div class="mb-4">
+                    <label for="register-password" class="form-label">Crea una Contraseña:</label>
+                    <input type="password" class="form-control form-control-lg" id="register-password" required minlength="6" placeholder="Mínimo 6 caracteres">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg w-100 submit-btn">
+                    <i class="fas fa-check-circle me-2"></i> Guardar y Activar Chapita
+                </button>
+            </form>
+             <p id="register-error" class="text-danger text-center mt-3 fw-bold"></p>
+        </div>
+
+        <!-- Vista de Perfil Público -->
+        <div id="public-profile-view" class="view card shadow-lg border-0 p-4 p-md-5 text-center">
+             <img id="public-pet-photo" src="generic-pet.png" alt="Foto Mascota" class="profile-pic mx-auto mb-3">
+             <h3 id="public-pet-name" class="mb-1 fw-bold">Nombre Mascota</h3>
+             <p class="text-muted mb-4">¡Ayúdame a volver a casa! 🏠❤️</p>
+
+             <div class="info-section mb-3">
+                <p class="mb-1"><strong><i class="fas fa-user me-2 text-primary"></i>Dueño/a:</strong></p>
+                <p class="fs-5" id="public-owner-name"></p>
+             </div>
+
+             <div id="public-observations-section" class="alert alert-info text-start mb-4" style="display: none;">
+                <h5 class="alert-heading"><i class="fas fa-info-circle me-2"></i>Notas Importantes:</h5>
+                <p id="public-pet-observations" class="mb-0"></p>
+             </div>
+
+             <div class="d-grid gap-2 mb-4">
+                <a id="whatsapp-button" href="#" class="btn btn-success btn-lg" target="_blank">
+                    <i class="fab fa-whatsapp me-2"></i> Contactar por WhatsApp
+                </a>
+                <a id="maps-button" href="#" class="btn btn-info btn-lg text-white" target="_blank" style="display: none;">
+                    <i class="fas fa-map-marker-alt me-2"></i> Ver Dirección en Mapa
+                </a>
+             </div>
+
+             <hr class="my-4">
+             <button id="go-to-login-btn" class="btn btn-outline-secondary btn-sm">
+                 <i class="fas fa-user-edit me-1"></i> ¿Eres el dueño? Edita aquí
+             </button>
+        </div>
+
+        <!-- Vista de Edición -->
+        <div id="edit-view" class="view card shadow-lg border-0 p-4 p-md-5">
+             <h2 class="text-center mb-4"><i class="fas fa-edit me-2"></i> Editar Información</h2>
+             <form id="edit-form" novalidate>
+                 <h4 class="section-title"><span>1. Tus Datos</span> <i class="fas fa-user-circle text-primary"></i></h4>
+                 <div class="mb-3">
+                     <label for="edit-owner-name" class="form-label">Nombre:</label>
+                     <input type="text" class="form-control form-control-lg" id="edit-owner-name" required>
+                 </div>
+                 <div class="mb-3">
+                    <label for="edit-owner-phone" class="form-label">Teléfono WhatsApp:</label>
+                    <input type="tel" class="form-control form-control-lg" id="edit-owner-phone" required>
+                </div>
+                <div class="mb-3">
+                    <label for="edit-owner-address" class="form-label">Dirección:</label>
+                    <input type="text" class="form-control form-control-lg" id="edit-owner-address">
+                </div>
+                <div class="form-check form-switch mb-4">
+                    <input class="form-check-input" type="checkbox" id="edit-show-address">
+                    <label class="form-check-label" for="edit-show-address">
+                        Permitir mostrar enlace a Google Maps.
+                    </label>
+                </div>
+
+                <h4 class="section-title"><span>2. Datos de tu Mascota</span> <i class="fas fa-heart text-danger"></i></h4>
+                 <div class="mb-3 text-center">
+                     <label class="form-label d-block">Foto Actual:</label>
+                     <img id="current-pet-photo" src="generic-pet.png" alt="Foto Actual" class="profile-pic-edit mb-2">
+                     <label for="edit-pet-photo" class="form-label">Cambiar Foto:</label>
+                     <input type="file" class="form-control form-control-lg" id="edit-pet-photo" accept="image/png, image/jpeg, image/gif">
+                 </div>
+                 <div class="mb-3">
+                     <label for="edit-pet-name" class="form-label">Nombre Mascota:</label>
+                     <input type="text" class="form-control form-control-lg" id="edit-pet-name" required>
+                 </div>
+                 <div class="mb-4">
+                     <label for="edit-pet-observations" class="form-label">Observaciones:</label>
+                     <textarea class="form-control form-control-lg" id="edit-pet-observations" rows="3"></textarea>
+                 </div>
+
+                <button type="submit" class="btn btn-primary btn-lg w-100 submit-btn mb-2">
+                    <i class="fas fa-save me-2"></i> Guardar Cambios
+                </button>
+                <button id="logout-btn" type="button" class="btn btn-outline-danger w-100">
+                    <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
+                </button>
+             </form>
+             <p id="edit-error" class="text-danger text-center mt-3 fw-bold"></p>
+             <p id="edit-success" class="text-success text-center mt-3 fw-bold"></p>
+        </div>
+
+         <!-- Vista de Login -->
+        <div id="login-view" class="view card shadow-lg border-0 p-4 p-md-5 mx-auto" style="max-width: 450px;">
+            <h2 class="text-center mb-4"><i class="fas fa-sign-in-alt me-2"></i> Iniciar Sesión</h2>
+            <p class="text-center text-muted mb-4">Accede para editar los datos de tu chapita.</p>
+             <form id="login-form" novalidate>
+                <div class="mb-3">
+                    <label for="login-email" class="form-label">Email:</label>
+                    <input type="email" class="form-control form-control-lg" id="login-email" required placeholder="tu@email.com">
+                </div>
+                <div class="mb-4">
+                    <label for="login-password" class="form-label">Contraseña:</label>
+                    <input type="password" class="form-control form-control-lg" id="login-password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg w-100 submit-btn">
+                    <i class="fas fa-paw me-2"></i> Ingresar
+                </button>
+             </form>
+             <p id="login-error" class="text-danger text-center mt-3 fw-bold"></p>
+             <p class="mt-4 text-center text-muted small">
+                 ¿Primera vez? Escanea tu chapita para registrarte. <br>
+                 <button id="back-to-profile-btn" class="btn btn-link btn-sm p-0" style="display:none;">Volver al perfil</button>
+             </p>
+        </div>
+
+        <!-- Vista de Error General -->
+         <div id="error-view" class="view card shadow-lg border-danger p-4 text-center">
+             <h2 class="text-danger mb-3"><i class="fas fa-exclamation-triangle me-2"></i> ¡Oh no!</h2>
+             <p id="error-message" class="fs-5">No pudimos cargar la información.</p>
+             <p class="text-muted">Por favor, revisa tu conexión o el código QR e intenta de nuevo.</p>
+             <button class="btn btn-primary mt-3" onclick="window.location.reload()">
+                 <i class="fas fa-redo me-2"></i> Recargar Página
+             </button>
+         </div>
+
+    </div> <!-- /container -->
+
+    <footer class="footer mt-auto py-3 bg-light text-center text-muted">
+        <div class="container">
+            <span>Mascotas QR <i class="fas fa-paw mx-1"></i> Una solución de Corte Láser</span>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <!-- NO necesitamos Storage SDK -->
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Tu Lógica JavaScript -->
+    <script src="app.js"></script>
+
+</body>
+</html>
