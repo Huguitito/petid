@@ -3,37 +3,27 @@
 <head>
   <meta charset="utf-8">
   <title>Mascotas QR - Redirigiendo...</title>
-   <!-- Estilos mínimos para que no se vea tan vacío -->
-  <style>
-      body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; background-color: #f8f9fa; }
-      .spinner { border: 4px solid rgba(0, 0, 0, 0.1); width: 36px; height: 36px; border-radius: 50%; border-left-color: #007bff; animation: spin 1s ease infinite; }
-      p { margin-top: 15px; color: #6c757d; }
-      @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-  </style>
+  <style> body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; background-color: #f8f9fa; } .spinner { border: 4px solid rgba(0, 0, 0, 0.1); width: 36px; height: 36px; border-radius: 50%; border-left-color: #007bff; animation: spin 1s ease infinite; } p { margin-top: 15px; color: #6c757d; } @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } } </style>
    <script>
-    // --- !! NOMBRE CORTO DEL REPO !! ---
-    const repoName = "petid";
+    // --- !! NOMBRE CORRECTO DEL REPO !! ---
+    const repoName = "petid"; // <<<--- USA EL REPO CORTO
     const pathName = window.location.pathname;
 
-    // Asegurarnos de que el repoName coincida realmente con el inicio del path
     if (pathName.startsWith(`/${repoName}/`)) {
-        // Extrae la parte DESPUÉS del nombre del repo (ej: p/ABC123XYZ)
-        const actualRedirectPath = pathName.substring(repoName.length + 1);
-        // Construye la URL de redirección a la raíz del repo, pasando la ruta original
+        const actualRedirectPath = pathName.substring(repoName.length + 1); // Quita /petid/
         const redirectUrl = `/${repoName}/?redirect=${encodeURIComponent(actualRedirectPath)}${window.location.search}${window.location.hash}`;
         console.log(`404: Redirigiendo a ${redirectUrl}`);
-        window.location.replace(redirectUrl); // Redirige inmediatamente
+        window.location.replace(redirectUrl);
     } else {
-         // Si la ruta no empieza como se espera (ej: /petid/...), redirige a la raíz sin parámetros
          console.warn(`404: Ruta inesperada ${pathName}. Redirigiendo a la raíz.`);
-         window.location.replace(`/${repoName}/`);
+         window.location.replace(`/${repoName}/`); // Redirige a la raíz del repo correcto
     }
    </script>
 </head>
 <body>
   <div class="spinner"></div>
-  <p>Un momento, buscando a tu mascota... 🐾</p>
-  <!-- El enlace es un fallback por si JavaScript falla -->
-  <p style="font-size: 0.8em;">Si no eres redirigido, <a href="/petid/">haz clic aquí</a>.</p> <!-- !! Actualiza href si repoName cambia !! -->
+  <p>Un momento... 🐾</p>
+  <!-- !! Actualiza href con el repoName correcto !! -->
+  <p style="font-size: 0.8em;">Si no eres redirigido, <a href="/petid/">haz clic aquí</a>.</p>
 </body>
 </html>

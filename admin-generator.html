@@ -4,24 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generador de QRs - Mascotas QR</title>
-
-    <!-- Google Fonts (Poppins) -->
+    <!-- Estilos y Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-     <!-- Font Awesome (para iconos) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <!-- Estilos -->
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f8f9fa;
-            padding: 20px;
-        }
+        body { font-family: 'Poppins', sans-serif; background-color: #f8f9fa; padding: 20px; }
         .container { max-width: 600px; background-color: #fff; padding: 30px; border-radius: 0.5rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); }
         h1 { color: #007bff; font-weight: 700; text-align: center; margin-bottom: 1rem; }
         h1 .subtitle { font-size: 0.6em; color: #6c757d; display: block; font-weight: 400;}
@@ -32,106 +23,15 @@
         .btn-primary { background-color: #007bff; border-color: #007bff; font-weight: 600;}
         .btn-primary:hover { background-color: #0056b3; border-color: #0056b3; }
         .btn-secondary {font-weight: 600;}
-
-        /* --- Estilos para la Tarjeta Imprimible --- */
-        .printable-card {
-            border: 1px dashed #6c757d;
-            padding: 15px;
-            background-color: #ffffff;
-            border-radius: 0.3rem;
-            font-size: 9pt; /* Tamaño pequeño para tarjeta */
-            line-height: 1.4;
-            color: #333;
-            margin-bottom: 1rem;
-        }
-        .printable-card .card-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: #007bff;
-            font-size: 11pt;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 5px;
-            margin-bottom: 10px;
-        }
-        .printable-card .logo {
-            width: 25px; /* Tamaño pequeño para logo */
-            height: auto;
-            margin-right: 8px;
-        }
-        .printable-card h6 {
-            font-weight: 700;
-            font-size: 10pt;
-            margin-bottom: 5px;
-            text-align: center;
-            color: #0056b3;
-        }
-        .printable-card ol {
-            padding-left: 20px; /* Menos padding para ahorrar espacio */
-            margin-bottom: 8px;
-        }
-        .printable-card li {
-            margin-bottom: 3px;
-        }
-        .printable-card .small {
-            font-size: 8pt; /* Aún más pequeño para notas */
-            color: #555;
-            margin-bottom: 5px;
-        }
-         .printable-card .unique-id-label {
-            font-weight: 600;
-            color: #dc3545; /* Rojo para destacar */
-        }
-        .printable-card .dotted {
-            border: none;
-            border-top: 1px dotted #ccc;
-            margin: 8px 0;
-        }
-        .printable-card .card-footer {
-            font-size: 7pt;
-            text-align: center;
-            color: #6c757d;
-            margin-top: 10px;
-            border-top: 1px solid #eee;
-            padding-top: 5px;
-        }
-
-        /* --- Estilos SOLO para Impresión --- */
-        @media print {
-            body * {
-                visibility: hidden; /* Oculta todo por defecto */
-                 font-size: 9pt !important; /* Asegura tamaño de fuente pequeño */
-            }
-            .printable-section, .printable-section * {
-                visibility: visible; /* Muestra solo la sección imprimible y sus hijos */
-            }
-            .printable-section {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%; /* Ocupa el ancho de la página de impresión */
-                margin: 0;
-                padding: 0;
-            }
-            .printable-card {
-                border: 1px solid #333; /* Borde sólido para corte */
-                width: 6.5cm; /* Ancho aproximado para tarjeta */
-                height: auto; /* Altura automática */
-                 /* Intenta evitar que se corte la tarjeta entre páginas */
-                page-break-inside: avoid;
-                box-shadow: none; /* Sin sombra al imprimir */
-                margin: 0 auto; /* Centrar en la hoja si es posible */
-                padding: 0.5cm; /* Padding interno */
-            }
-             .printable-card .logo { width: 0.8cm; height: auto; }
-             .printable-card .card-header { font-size: 10pt; }
-             .printable-card h6 { font-size: 9pt; }
-             .printable-card ol { padding-left: 1cm; }
-             .printable-card .small { font-size: 7pt; }
-             .printable-card .card-footer { font-size: 6pt; }
-        }
-
+        .printable-card { border: 1px dashed #6c757d; padding: 15px; background-color: #ffffff; border-radius: 0.3rem; font-size: 9pt; line-height: 1.4; color: #333; margin-bottom: 1rem; }
+        .printable-card .card-header { display: flex; align-items: center; justify-content: center; font-weight: 700; color: #007bff; font-size: 11pt; border-bottom: 1px solid #eee; padding-bottom: 5px; margin-bottom: 10px; }
+        .printable-card .logo { width: 25px; height: auto; margin-right: 8px; }
+        .printable-card h6 { font-weight: 700; font-size: 10pt; margin-bottom: 5px; text-align: center; color: #0056b3; }
+        .printable-card ol { padding-left: 20px; margin-bottom: 8px; } .printable-card li { margin-bottom: 3px; }
+        .printable-card .small { font-size: 8pt; color: #555; margin-bottom: 5px; } .printable-card .unique-id-label { font-weight: 600; color: #dc3545; }
+        .printable-card .dotted { border: none; border-top: 1px dotted #ccc; margin: 8px 0; }
+        .printable-card .card-footer { font-size: 7pt; text-align: center; color: #6c757d; margin-top: 10px; border-top: 1px solid #eee; padding-top: 5px; }
+        @media print { body * { visibility: hidden; font-size: 9pt !important; } .printable-section, .printable-section * { visibility: visible; } .printable-section { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 0; } .printable-card { border: 1px solid #333; width: 6.5cm; height: auto; page-break-inside: avoid; box-shadow: none; margin: 0 auto; padding: 0.5cm; } .printable-card .logo { width: 0.8cm; } .printable-card .card-header { font-size: 10pt; } .printable-card h6 { font-size: 9pt; } .printable-card ol { padding-left: 1cm; } .printable-card .small { font-size: 7pt; } .printable-card .card-footer { font-size: 6pt; } }
     </style>
 </head>
 <body>
@@ -150,30 +50,31 @@
         <div id="qr-result" style="display: none;">
             <h4 class="text-center mt-4">¡QR Generado! <i class="fas fa-check-circle text-success"></i></h4>
             <p><strong>ID Único:</strong> <code id="pet-id"></code></p>
-            <p><strong>URL Completa:</strong> <span id="full-url" class="small"></span></p>
+            <p><strong>URL Completa:</strong> <span id="full-url" class="small text-break"></span></p> <!-- text-break para URLs largas -->
             <p class="text-center mt-3"><strong>Código QR (Clic derecho > Guardar Imagen):</strong></p>
             <div id="qr-code"></div>
 
-             <!-- =========== SECCIÓN IMPRIMIBLE DE INSTRUCCIONES =========== -->
+             <!-- SECCIÓN IMPRIMIBLE DE INSTRUCCIONES -->
             <div id="printable-instructions" class="mt-4 printable-section" style="display: none;">
                 <hr>
                 <h5 class="text-center mb-3">Instrucciones para el Cliente</h5>
                 <div class="printable-card">
                     <div class="card-header">
-                        <img src="generic-pet.png" alt="Logo" class="logo"> <!-- Usa tu imagen genérica -->
+                        <!-- Usa la ruta correcta al placeholder -->
+                        <img src="/mascotas-qr-v2/generic-pet.png" alt="Logo" class="logo">
                         Mascotas QR
                     </div>
                     <div class="card-body">
                         <h6>¡Activa tu Chapita! 🐾</h6>
                         <ol>
-                            <li><b>Escanea</b> el QR de la chapita <i class="fas fa-qrcode"></i>.</li>
-                            <li><b>Registra</b> tus datos y los de tu mascota.</li>
-                            <li>¡Listo! Colócala en su collar <i class="fas fa-check-circle text-success"></i>.</li>
+                            <li><b>Escanea</b> el QR <i class="fas fa-qrcode"></i>.</li>
+                            <li><b>Registra</b> datos.</li>
+                            <li>¡Listo! <i class="fas fa-check-circle text-success"></i></li>
                         </ol>
-                        <p class="small unique-id-label">ID Único de esta chapita: <strong id="instruction-pet-id"></strong></p>
+                        <p class="small unique-id-label">ID: <strong id="instruction-pet-id"></strong></p>
                         <hr class="dotted">
-                        <p class="small"><b>¿Cómo funciona?</b> Si se pierde, quien la encuentre escaneará el QR y podrá contactarte por WhatsApp <i class="fab fa-whatsapp text-success"></i>.</p>
-                        <p class="small"><b>¿Editar datos?</b> Escanea de nuevo e inicia sesión.</p>
+                        <p class="small"><b>¿Perdido?</b> Escanean QR y te contactan <i class="fab fa-whatsapp text-success"></i>.</p>
+                        <p class="small"><b>¿Editar?</b> Escanea y loguéate.</p>
                     </div>
                     <div class="card-footer">
                         Solución de Corte Láser
@@ -183,7 +84,7 @@
                     <button id="print-btn" class="btn btn-secondary btn-sm"><i class="fas fa-print"></i> Imprimir Instrucciones</button>
                 </div>
             </div>
-            <!-- =========================================================== -->
+            <!-- FIN SECCIÓN IMPRIMIBLE -->
 
         </div>
     </div>
@@ -197,23 +98,19 @@
         const petIdCode = document.getElementById('pet-id');
         const fullUrlSpan = document.getElementById('full-url');
         const qrCodeDiv = document.getElementById('qr-code');
-        // --- Elementos de la sección imprimible ---
         const printableInstructionsDiv = document.getElementById('printable-instructions');
         const instructionPetIdSpan = document.getElementById('instruction-pet-id');
         const printBtn = document.getElementById('print-btn');
 
-
-        // --- Asumiendo Repo 'petid' y segmento '/p/' ---
-        const repoName = "petid"; // Actualiza si usaste otro nombre
+        // --- !! NOMBRE CORRECTO DEL REPO !! ---
+        const repoName = "petid"; // <<<--- USA EL REPO CORTO
         const baseUrl = `https://huguitito.github.io/${repoName}/`;
-        const petSegment = 'p/';
+        const petSegment = 'p/'; // <<<--- USA EL SEGMENTO CORTO
 
         function generateShortId(length = 8) {
             const chars = 'ABCDEFGHIJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz123456789';
             let result = '';
-            for (let i = 0; i < length; i++) {
-                result += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
+            for (let i = 0; i < length; i++) { result += chars.charAt(Math.floor(Math.random() * chars.length)); }
             return result;
         }
 
@@ -221,34 +118,21 @@
             const shortId = generateShortId();
             const fullUrl = `${baseUrl}${petSegment}${shortId}`;
 
-            // Mostrar datos del QR
             petIdCode.textContent = shortId;
             fullUrlSpan.textContent = fullUrl;
-            qrCodeDiv.innerHTML = ''; // Limpiar QR anterior
-            new QRCode(qrCodeDiv, {
-                text: fullUrl,
-                width: 150,
-                height: 150,
-                colorDark : "#000000",
-                colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.H
-            });
+            qrCodeDiv.innerHTML = '';
+            new QRCode(qrCodeDiv, { text: fullUrl, width: 150, height: 150, colorDark : "#000000", colorLight : "#ffffff", correctLevel : QRCode.CorrectLevel.H });
             qrResultDiv.style.display = 'block';
 
-            // --- Mostrar sección de instrucciones y poner el ID ---
             if (printableInstructionsDiv && instructionPetIdSpan) {
-                instructionPetIdSpan.textContent = shortId; // Pone el ID generado
-                printableInstructionsDiv.style.display = 'block'; // Muestra la sección
+                instructionPetIdSpan.textContent = shortId;
+                printableInstructionsDiv.style.display = 'block';
             }
         });
 
-        // --- Funcionalidad del botón Imprimir ---
         if (printBtn) {
-            printBtn.addEventListener('click', () => {
-                window.print(); // Llama a la función de impresión del navegador
-            });
+            printBtn.addEventListener('click', () => { window.print(); });
         }
-
     </script>
 </body>
 </html>
